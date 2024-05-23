@@ -33,11 +33,11 @@ export class ParentComponent {
     const formData = new FormData();
     formData.append('file', this.uploadForm.get('file')?.value);
     // post request to an api
-
-    this.http.post('', formData, {
+    this.http.post('api_Url', formData, {
       reportProgress: true,
       observe: 'events'
     }).subscribe(event => {
+      // check if it is an upload progress event
       if (event.type === HttpEventType.UploadProgress) {
         this.uploadProgress = Math.round(100 * (event.loaded / (event.total ?? 1)));
       } else if (event.type === HttpEventType.Response) {
